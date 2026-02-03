@@ -31,7 +31,8 @@ PREDEFINED_EVENT_IDS = {
     # 🤖 AI & Tech
     "ai_frontiermath_90": 79080,
     "inflation_2026": 80773,
-    "us_recession_2026": 48802
+    "us_recession_2026": 48802,
+    "nvidia_february_2026": 186955
 }
 
 # ===============================
@@ -61,17 +62,18 @@ SESSION = make_session()
 import re
 
 def extract_json(text):
-    # Strip markdown code fences if present
     text = text.strip()
-    if text.startswith("```"):
-        text = text.split("```", 2)[1]
 
-    # Force object extraction FIRST
-    obj_match = re.search(r"\{[\s\S]*\}", text)
-    if not obj_match:
+    # Remove fenced code blocks safely
+    if text.startswith("```"):
+        text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
+        text = re.sub(r"\n?```$", "", text)
+
+    match = re.search(r"\{[\s\S]*\}", text)
+    if not match:
         raise ValueError("No JSON object found")
 
-    return json.loads(obj_match.group(0))
+    return json.loads(match.group(0))
 
 def get_event_by_id(event_id):
     try:
@@ -89,7 +91,31 @@ def get_event_by_id(event_id):
 # ===============================
 # CLOB → PRICE (PUBLIC ENDPOINT)
 # ===============================
+import statistics
 
+def compute_nvidia_confidence(market_data):
+    probs = []
+
+    for m in market_data:
+        if m["event_key"] == "nvidia_february_2026":
+            q = m["market_question"]
+            p = m["outcomes"].get("Yes", 0)
+
+            if "reach $" in q:
+                price = int(q.split("$")[1].split()[0])
+                if price >= 200:
+                    probs.append(p)
+
+    if len(probs) < 2:
+        return 0.5
+
+    avg = statistics.mean(probs)
+    std = statistics.pstdev(probs)
+
+    # Confidence increases with conviction AND agreement
+    confidence = avg * (1 - std)
+
+    return round(confidence, 2)
 def fetch_token_midpoint(token_id):
     try:
         resp = requests.get(
@@ -220,6 +246,7 @@ def run_llm_analysis(market_data):
         api_key=GROQ_API_KEY,
         model="llama-3.3-70b-versatile"
     )
+    nvidia_confidence = compute_nvidia_confidence(market_data)
 
     prompt = f"""
     You are a macro market intelligence engine.
@@ -229,6 +256,8 @@ def run_llm_analysis(market_data):
 
     INPUT DATA:
     {json.dumps(market_data, indent=2)}
+    DERIVED SIGNALS:
+    NVIDIA_CONFIDENCE_OVERRIDE = {nvidia_confidence}
 
     OUTPUT REQUIREMENTS:
     Return ONE valid JSON object with the following structure:
@@ -249,9 +278,19 @@ def run_llm_analysis(market_data):
         "rate_cut_bias": ""
     }},
     "asset_outlook": {{
-        "equities": {{ "bias": "", "confidence": number between 0 and 1 }},
-        "bitcoin": {{ "bias": "", "confidence": number between 0 and 1 }},
-        "us_economy": {{ "bias": "", "confidence": number between 0 and 1 }}
+        "nvidia": {{
+        "bias": "Positive | Neutral | Negative",
+        "confidence": number between 0 and 1,
+        "reasoning": ""
+        }},
+        "bitcoin": {{
+        "bias": "",
+        "confidence": number between 0 and 1
+        }},
+        "us_economy": {{
+        "bias": "",
+        "confidence": number between 0 and 1
+        }}
     }},
     "top_stocks": [
         {{
@@ -272,19 +311,25 @@ def run_llm_analysis(market_data):
     RULES:
     - Base conclusions ONLY on the input probabilities
     - Prioritize rates, yields, inflation, and recession risk over narratives
-    - Use macro reasoning (rates, yields, AI, liquidity)
-    - Do NOT mention Polymarket or prediction markets
+    - Do NOT mention prediction markets
     - Do NOT add text outside JSON
     - Stocks MUST be individual operating companies
     - ETFs, indices, sector funds, and baskets are STRICTLY forbidden
-    - If an ETF would be appropriate, select the strongest underlying company instead
     - Return EXACTLY 3 stocks in "top_stocks"
-    - Bitcoin outlook refers to the asset itself, not ETFs or proxies
+    - Bitcoin outlook refers to the asset itself
+    - A specific NVIDIA-related prediction market is present
+    - NVIDIA outlook MUST be derived from the distribution of its price target probabilities
+    - You MUST use NVIDIA_CONFIDENCE_OVERRIDE as the confidence value for NVIDIA.
+    - Do NOT copy a single price-level probability as confidence.
+    - Consider both upside levels and downside protection
+    - Do NOT include a generic equities outlook
+
     CONSISTENCY RULES (MANDATORY):
     - If recession_probability > 0.6:
     - market_sentiment MUST NOT be "Bullish"
     - market_regime.risk MUST be "Risk-Off" or "Transitional"
-    - equities.bias MUST NOT be "Positive"
+    - If NVIDIA has ≥ 2 price targets ≥ $200 with probability ≥ 0.8:
+        nvidia.bias MUST be "Positive"
     - If fed_policy_bias is "Hawkish" and rate_cut_bias is "Unlikely":
     - liquidity MUST NOT be "Easing"
     - If volatility is "Elevated":
@@ -294,7 +339,7 @@ def run_llm_analysis(market_data):
     - 0–30 = Bearish
     - 31–60 = Neutral
     - 61–100 = Bullish
-    
+
     Return ONLY valid JSON.
     """
 
