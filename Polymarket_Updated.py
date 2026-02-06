@@ -2,17 +2,18 @@ import requests
 import json
 import os
 import time
-from langchain_groq import ChatGroq
+from sarvamai import SarvamAI
+from dotenv import load_dotenv
 
 # ===============================
 # CONFIG
 # ===============================
 
+CACHE_FILE = "polymarket_cache.json"
+
 GAMMA_BASE = "https://gamma-api.polymarket.com"
 CLOB_BASE = "https://clob.polymarket.com"
 
-from dotenv import load_dotenv
-import os
 
 load_dotenv("key.env")
 
@@ -107,15 +108,25 @@ def compute_nvidia_confidence(market_data):
                     probs.append(p)
 
     if len(probs) < 2:
-        return 0.5
+        return {
+            "confidence": 0.5,
+            "avg_probability": 0.0,
+            "dispersion": 1.0,
+            "num_targets": len(probs)
+        }
 
     avg = statistics.mean(probs)
     std = statistics.pstdev(probs)
 
-    # Confidence increases with conviction AND agreement
     confidence = avg * (1 - std)
 
-    return round(confidence, 2)
+    return {
+        "confidence": round(confidence, 2),
+        "avg_probability": round(avg, 2),
+        "dispersion": round(std, 2),
+        "num_targets": len(probs)
+    }
+
 def fetch_token_midpoint(token_id):
     try:
         resp = requests.get(
@@ -174,7 +185,10 @@ def get_safe_outcome_labels(market, token_ids):
 
     return [f"Outcome_{i}" for i in range(len(token_ids))]
 
-def fetch_all_market_data():
+def fetch_all_market_data(use_cache=True):
+    if use_cache and os.path.exists(CACHE_FILE):
+        with open(CACHE_FILE, "r") as f:
+            return json.load(f)
     results = []
 
     for key, event_id in PREDEFINED_EVENT_IDS.items():
@@ -234,30 +248,74 @@ def fetch_all_market_data():
                 "volume": market.get("volume", 0),
                 "end_date": market.get("endDate")
             })
+    with open(CACHE_FILE, "w") as f:
+        json.dump(results, f, indent=2)
 
     return results
 
 # ===============================
 # LLM INTERPRETATION
 # ===============================
+def build_macro_signals(market_data):
+    signals = {}
+
+    for m in market_data:
+        key = m["event_key"]
+        yes_prob = m["outcomes"].get("Yes", 0)
+
+        if key not in signals:
+            signals[key] = {
+                "avg_yes_probability": [],
+                "markets": 0
+            }
+
+        signals[key]["avg_yes_probability"].append(yes_prob)
+        signals[key]["markets"] += 1
+
+    # collapse to averages
+    summary = {}
+    for k, v in signals.items():
+        summary[k] = {
+            "avg_yes_probability": round(
+                sum(v["avg_yes_probability"]) / len(v["avg_yes_probability"]), 3
+            ),
+            "num_markets": v["markets"]
+        }
+
+    return summary
+
+def call_llm(client, prompt):
+    response = client.chat.completions(
+        messages=[
+            {"role": "system", "content": "You are a macro market intelligence engine."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response.choices[0].message.content
 
 def run_llm_analysis(market_data):
-    llm = ChatGroq(
-        api_key=GROQ_API_KEY,
-        model="llama-3.3-70b-versatile"
+    client = SarvamAI(
+    api_subscription_key=os.getenv("SARVAM_API_KEY")
     )
-    nvidia_confidence = compute_nvidia_confidence(market_data)
+    nvidia_signal = compute_nvidia_confidence(market_data)
+
+    print("\n=== DERIVED NVIDIA SIGNAL ===")
+    print(json.dumps(nvidia_signal, indent=2))
+
+    macro_signals = build_macro_signals(market_data)
 
     prompt = f"""
-    You are a macro market intelligence engine.
+    You are a deterministic macro market intelligence engine.
+    You must strictly follow rules and output valid JSON only.
 
     You are given real-money probabilities from prediction markets.
     Your job is to infer the current macro regime and market outlook.
 
-    INPUT DATA:
-    {json.dumps(market_data, indent=2)}
     DERIVED SIGNALS:
-    NVIDIA_CONFIDENCE_OVERRIDE = {nvidia_confidence}
+    NVIDIA_SIGNAL = {json.dumps(nvidia_signal, indent=2)}
+
+    MACRO SIGNALS (Aggregated from prediction markets):
+    {json.dumps(macro_signals, indent=2)}
 
     OUTPUT REQUIREMENTS:
     Return ONE valid JSON object with the following structure:
@@ -319,7 +377,8 @@ def run_llm_analysis(market_data):
     - Bitcoin outlook refers to the asset itself
     - A specific NVIDIA-related prediction market is present
     - NVIDIA outlook MUST be derived from the distribution of its price target probabilities
-    - You MUST use NVIDIA_CONFIDENCE_OVERRIDE as the confidence value for NVIDIA.
+    - You MUST use NVIDIA_SIGNAL.confidence as the confidence value for NVIDIA.
+    - You MUST reference NVIDIA_SIGNAL.avg_probability and NVIDIA_SIGNAL.dispersion in reasoning.
     - Do NOT copy a single price-level probability as confidence.
     - Consider both upside levels and downside protection
     - Do NOT include a generic equities outlook
@@ -329,7 +388,7 @@ def run_llm_analysis(market_data):
     - market_sentiment MUST NOT be "Bullish"
     - market_regime.risk MUST be "Risk-Off" or "Transitional"
     - If NVIDIA has ≥ 2 price targets ≥ $200 with probability ≥ 0.8:
-        nvidia.bias MUST be "Positive"
+        -nvidia.bias MUST be "Positive"
     - If fed_policy_bias is "Hawkish" and rate_cut_bias is "Unlikely":
     - liquidity MUST NOT be "Easing"
     - If volatility is "Elevated":
@@ -343,12 +402,40 @@ def run_llm_analysis(market_data):
     Return ONLY valid JSON.
     """
 
-    response = llm.invoke(prompt)
-    return response.content
+    return call_llm(client, prompt)
 
 # ===============================
 # MAIN
 # ===============================
+
+def validate_llm_output(parsed):
+    corrections = []
+
+    rec = parsed["crowd_signals"]["recession_probability"]
+
+    if rec > 0.6:
+        if parsed["market_sentiment"]["label"] == "Bullish":
+            parsed["market_sentiment"]["label"] = "Neutral"
+            parsed["market_sentiment"]["score"] = min(
+                parsed["market_sentiment"]["score"], 60
+            )
+            corrections.append("Downgraded sentiment due to high recession risk")
+
+        if parsed["market_regime"]["risk"] == "Risk-On":
+            parsed["market_regime"]["risk"] = "Transitional"
+            corrections.append("Adjusted risk regime due to recession probability")
+
+    if parsed["market_regime"]["volatility"] == "Elevated":
+        parsed["market_sentiment"]["score"] = min(
+            parsed["market_sentiment"]["score"], 60
+        )
+
+    # Schema safety
+    if parsed["asset_outlook"]["us_economy"]["bias"] not in ["Positive", "Neutral", "Negative"]:
+        parsed["asset_outlook"]["us_economy"]["bias"] = "Negative"
+        corrections.append("Normalized US economy bias to schema")
+
+    return corrections
 
 if __name__ == "__main__":
     print("\nFetching Polymarket data...\n")
@@ -357,7 +444,7 @@ if __name__ == "__main__":
     if not market_data:
         raise RuntimeError("No Polymarket data fetched — aborting.")
 
-    print("=== RAW MARKET DATA ===")
+    print("=== RAW MARKET DATA (Polymarket Normalized) ===")
     print(json.dumps(market_data, indent=2))
 
     print("\nRunning LLM interpretation...\n")
@@ -368,7 +455,17 @@ if __name__ == "__main__":
 
     try:
         parsed = extract_json(llm_output)
-        print("\n=== PARSED OUTPUT ===")
+
+        corrections = validate_llm_output(parsed)
+
+        if corrections:
+            print("\n⚠️ POST-PROCESSING ADJUSTMENTS APPLIED:")
+            for c in corrections:
+                print("-", c)
+
+        print("\n=== FINAL OUTPUT (ENGINE-VALIDATED) ===")
         print(json.dumps(parsed, indent=2))
-    except json.JSONDecodeError:
-        print("\n⚠️ LLM output was not valid JSON")
+
+    except Exception as e:
+        print("\n❌ FAILED TO PROCESS LLM OUTPUT")
+        print(str(e))

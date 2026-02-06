@@ -1,0 +1,639 @@
+[
+  {
+    "event_key": "fed_decision_march",
+    "event_id": 67284,
+    "event_title": "Fed decision in March?",
+    "market_id": "654412",
+    "market_question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+    "outcomes": {
+      "No": 0.0105,
+      "Yes": 0.9895
+    },
+    "volume": "22705334.658462",
+    "end_date": "2026-03-18T00:00:00Z"
+  },
+  {
+    "event_key": "fed_decision_march",
+    "event_id": 67284,
+    "event_title": "Fed decision in March?",
+    "market_id": "654413",
+    "market_question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+    "outcomes": {
+      "No": 0.075,
+      "Yes": 0.925
+    },
+    "volume": "5375915.742295",
+    "end_date": "2026-03-18T00:00:00Z"
+  },
+  {
+    "event_key": "fed_decision_march",
+    "event_id": 67284,
+    "event_title": "Fed decision in March?",
+    "market_id": "654414",
+    "market_question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+    "outcomes": {
+      "No": 0.905,
+      "Yes": 0.095
+    },
+    "volume": "5758535.526895",
+    "end_date": "2026-03-18T00:00:00Z"
+  },
+  {
+    "event_key": "fed_decision_march",
+    "event_id": 67284,
+    "event_title": "Fed decision in March?",
+    "market_id": "654415",
+    "market_question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
+    "outcomes": {
+      "No": 0.0185,
+      "Yes": 0.9815
+    },
+    "volume": "25225902.435569",
+    "end_date": "2026-03-18T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "902299",
+    "market_question": "Will the 10-year Treasury yield hit 4.3% before 2027?",
+    "outcomes": {
+      "No": 1.0,
+      "Yes": 0.0
+    },
+    "volume": "6036.705823",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "902298",
+    "market_question": "Will the 10-year Treasury yield hit 4.4% before 2027?",
+    "outcomes": {
+      "No": 0.755,
+      "Yes": 0.245
+    },
+    "volume": "120.290727",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677021",
+    "market_question": "Will the 10-year Treasury yield hit 4.5% before 2027?",
+    "outcomes": {
+      "No": 0.575,
+      "Yes": 0.425
+    },
+    "volume": "2623.440699",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677023",
+    "market_question": "Will the 10-year Treasury yield hit 4.8% before 2027?",
+    "outcomes": {
+      "No": 0.195,
+      "Yes": 0.805
+    },
+    "volume": "36100.875139",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677025",
+    "market_question": "Will the 10-year Treasury yield hit 5.2% before 2027?",
+    "outcomes": {
+      "No": 0.07,
+      "Yes": 0.93
+    },
+    "volume": "3474.49155",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677027",
+    "market_question": "Will the 10-year Treasury yield hit 5.7% before 2027?",
+    "outcomes": {
+      "No": 0.0515,
+      "Yes": 0.9485
+    },
+    "volume": "674.149279",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677022",
+    "market_question": "Will the 10-year Treasury yield hit 4.6% before 2027?",
+    "outcomes": {
+      "No": 0.325,
+      "Yes": 0.675
+    },
+    "volume": "4764.347423",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677024",
+    "market_question": "Will the 10-year Treasury yield hit 5.0% before 2027?",
+    "outcomes": {
+      "No": 0.125,
+      "Yes": 0.875
+    },
+    "volume": "11313.965869",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677026",
+    "market_question": "Will the 10-year Treasury yield hit 5.5% before 2027?",
+    "outcomes": {
+      "No": 0.054,
+      "Yes": 0.946
+    },
+    "volume": "633.366327",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_high",
+    "event_id": 79104,
+    "event_title": "How high will 10-year Treasury yield go before 2027?",
+    "market_id": "677028",
+    "market_question": "Will the 10-year Treasury yield hit 6.0% before 2027?",
+    "outcomes": {
+      "No": 0.044,
+      "Yes": 0.956
+    },
+    "volume": "155.986753",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677138",
+    "market_question": "Will the 10-year Treasury yield dip below 4.0% before 2027?",
+    "outcomes": {
+      "No": 0.725,
+      "Yes": 0.275
+    },
+    "volume": "1335.033205",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677140",
+    "market_question": "Will the 10-year Treasury yield dip below 3.0% before 2027?",
+    "outcomes": {
+      "No": 0.155,
+      "Yes": 0.845
+    },
+    "volume": "16",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677142",
+    "market_question": "Will the 10-year Treasury yield dip below 1.0% before 2027?",
+    "outcomes": {
+      "No": 0.0465,
+      "Yes": 0.9535
+    },
+    "volume": "37938.55",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677144",
+    "market_question": "Will the 10-year Treasury yield dip below 3.7% before 2027?",
+    "outcomes": {
+      "No": 0.65,
+      "Yes": 0.35
+    },
+    "volume": "17.8",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677146",
+    "market_question": "Will the 10-year Treasury yield dip below 3.9% before 2027?",
+    "outcomes": {
+      "No": 0.5585,
+      "Yes": 0.4415
+    },
+    "volume": "971.734432",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677139",
+    "market_question": "Will the 10-year Treasury yield dip below 3.5% before 2027?",
+    "outcomes": {
+      "No": 0.25,
+      "Yes": 0.75
+    },
+    "volume": "329.686395",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677141",
+    "market_question": "Will the 10-year Treasury yield dip below 2.0% before 2027?",
+    "outcomes": {
+      "No": 0.085,
+      "Yes": 0.915
+    },
+    "volume": "136.21052",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677143",
+    "market_question": "Will the 10-year Treasury yield dip below 3.6% before 2027?",
+    "outcomes": {
+      "No": 0.435,
+      "Yes": 0.565
+    },
+    "volume": "115",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "treasury_yield_low",
+    "event_id": 79123,
+    "event_title": "How low will 10-year Treasury yield get before 2027?",
+    "market_id": "677145",
+    "market_question": "Will the 10-year Treasury yield dip below 3.8% before 2027?",
+    "outcomes": {
+      "No": 0.58,
+      "Yes": 0.42
+    },
+    "volume": "351.815065",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "microstrategy_btc_sale",
+    "event_id": 16167,
+    "event_title": "MicroStrategy sells any Bitcoin by ___ ?",
+    "market_id": "516926",
+    "market_question": "MicroStrategy sells any Bitcoin in 2025?",
+    "outcomes": {
+      "No": 0.0,
+      "Yes": 1.0
+    },
+    "volume": "17976157.529867",
+    "end_date": "2025-12-31T12:00:00Z"
+  },
+  {
+    "event_key": "microstrategy_btc_sale",
+    "event_id": 16167,
+    "event_title": "MicroStrategy sells any Bitcoin by ___ ?",
+    "market_id": "824952",
+    "market_question": "MicroStrategy sells any Bitcoin by December 31, 2026?",
+    "outcomes": {
+      "No": 0.265,
+      "Yes": 0.735
+    },
+    "volume": "207291.163219",
+    "end_date": "2026-07-01T04:00:00Z"
+  },
+  {
+    "event_key": "microstrategy_btc_sale",
+    "event_id": 16167,
+    "event_title": "MicroStrategy sells any Bitcoin by ___ ?",
+    "market_id": "692250",
+    "market_question": "MicroStrategy sells any Bitcoin by March 31, 2026?",
+    "outcomes": {
+      "No": 0.044,
+      "Yes": 0.956
+    },
+    "volume": "1169603.694893",
+    "end_date": null
+  },
+  {
+    "event_key": "microstrategy_btc_sale",
+    "event_id": 16167,
+    "event_title": "MicroStrategy sells any Bitcoin by ___ ?",
+    "market_id": "692258",
+    "market_question": "MicroStrategy sells any Bitcoin by June 30, 2026?",
+    "outcomes": {
+      "No": 0.105,
+      "Yes": 0.895
+    },
+    "volume": "527229.036232",
+    "end_date": "2026-07-01T04:00:00Z"
+  },
+  {
+    "event_key": "ai_frontiermath_90",
+    "event_id": 79080,
+    "event_title": "AI model scores \u2265 90% on FrontierMath Benchmark before 2027?",
+    "market_id": "676847",
+    "market_question": "AI model scores \u2265 90% on FrontierMath Benchmark before 2027?",
+    "outcomes": {
+      "No": 0.125,
+      "Yes": 0.875
+    },
+    "volume": "1848.094669",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680950",
+    "market_question": "Will inflation reach more than 4% in 2026?",
+    "outcomes": {
+      "No": 0.105,
+      "Yes": 0.895
+    },
+    "volume": "8924.872296",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680954",
+    "market_question": "Will inflation reach more than 10% in 2026?",
+    "outcomes": {
+      "No": 0.147,
+      "Yes": 0.853
+    },
+    "volume": "275.110106",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680951",
+    "market_question": "Will inflation reach more than 5% in 2026?",
+    "outcomes": {
+      "No": 0.095,
+      "Yes": 0.905
+    },
+    "volume": "1889.910272",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680949",
+    "market_question": "Will inflation reach more than 3% in 2026?",
+    "outcomes": {
+      "No": 0.285,
+      "Yes": 0.715
+    },
+    "volume": "48304.728684",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680953",
+    "market_question": "Will inflation reach more than 8% in 2026?",
+    "outcomes": {
+      "No": 0.057,
+      "Yes": 0.943
+    },
+    "volume": "156.272211",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "inflation_2026",
+    "event_id": 80773,
+    "event_title": "How high will inflation get in 2026?",
+    "market_id": "680952",
+    "market_question": "Will inflation reach more than 6% in 2026?",
+    "outcomes": {
+      "No": 0.07,
+      "Yes": 0.93
+    },
+    "volume": "1173.788749",
+    "end_date": "2026-12-31T00:00:00Z"
+  },
+  {
+    "event_key": "us_recession_2026",
+    "event_id": 48802,
+    "event_title": "US recession by end of 2026?",
+    "market_id": "609655",
+    "market_question": "US recession by end of 2026?",
+    "outcomes": {
+      "No": 0.23,
+      "Yes": 0.77
+    },
+    "volume": "205211.230213",
+    "end_date": "2027-01-31T00:00:00Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262843",
+    "market_question": "Will NVIDIA reach $272 in February?",
+    "outcomes": {
+      "No": 0.003,
+      "Yes": 0.997
+    },
+    "volume": "5428.27555",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262844",
+    "market_question": "Will NVIDIA reach $252 in February?",
+    "outcomes": {
+      "No": 0.027,
+      "Yes": 0.973
+    },
+    "volume": "10108.649781",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262845",
+    "market_question": "Will NVIDIA reach $236 in February?",
+    "outcomes": {
+      "No": 0.04,
+      "Yes": 0.96
+    },
+    "volume": "919.879238",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262846",
+    "market_question": "Will NVIDIA reach $220 in February?",
+    "outcomes": {
+      "No": 0.055,
+      "Yes": 0.945
+    },
+    "volume": "2241.783219",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262847",
+    "market_question": "Will NVIDIA reach $208 in February?",
+    "outcomes": {
+      "No": 0.16,
+      "Yes": 0.84
+    },
+    "volume": "2969.617349",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262848",
+    "market_question": "Will NVIDIA reach $200 in February?",
+    "outcomes": {
+      "No": 0.21,
+      "Yes": 0.79
+    },
+    "volume": "5646.412251",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262849",
+    "market_question": "Will NVIDIA reach $192 in February?",
+    "outcomes": {
+      "No": 0.395,
+      "Yes": 0.605
+    },
+    "volume": "2330.01708",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262850",
+    "market_question": "Will NVIDIA dip to $184 in February?",
+    "outcomes": {
+      "No": 1.0,
+      "Yes": 0.0
+    },
+    "volume": "15826.123386",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262852",
+    "market_question": "Will NVIDIA dip to $176 in February?",
+    "outcomes": {
+      "No": 0.997,
+      "Yes": 0.003
+    },
+    "volume": "4869.048713",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262853",
+    "market_question": "Will NVIDIA dip to $168 in February?",
+    "outcomes": {
+      "No": 0.59,
+      "Yes": 0.41
+    },
+    "volume": "3812.41908",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262855",
+    "market_question": "Will NVIDIA dip to $156 in February?",
+    "outcomes": {
+      "No": 0.28,
+      "Yes": 0.72
+    },
+    "volume": "2325.126548",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262856",
+    "market_question": "Will NVIDIA dip to $144 in February?",
+    "outcomes": {
+      "No": 0.075,
+      "Yes": 0.925
+    },
+    "volume": "6463.112335",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262858",
+    "market_question": "Will NVIDIA dip to $128 in February?",
+    "outcomes": {
+      "No": 0.0345,
+      "Yes": 0.9655
+    },
+    "volume": "606.440894",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  },
+  {
+    "event_key": "nvidia_february_2026",
+    "event_id": 186955,
+    "event_title": "What will NVIDIA (NVDA) hit in February 2026?",
+    "market_id": "1262859",
+    "market_question": "Will NVIDIA dip to $108 in February?",
+    "outcomes": {
+      "No": 0.0145,
+      "Yes": 0.9855
+    },
+    "volume": "1913.200433",
+    "end_date": "2026-03-01T04:59:59.999Z"
+  }
+]
