@@ -1,134 +1,77 @@
-AI-Driven Macro Market Intelligence System
+Market Pulse
 
-An end-to-end macro market intelligence pipeline that uses real-money prediction market data to infer market regimes, economic outlooks, and regime-aware stock opportunities.
+Market Pulse is a probabilistic market intelligence MVP that infers macro regimes and stock-level outlooks using real-money prediction market data.
 
-This project leverages Polymarket probabilities and a large language model (LLaMA-3) to transform crowd-sourced expectations into structured macro insights.
-
-⸻
-
-🔍 What This Project Does
-	•	Ingests live prediction-market data across major macroeconomic themes
-	•	Normalizes probabilistic signals from liquid and illiquid markets
-	•	Infers market sentiment, risk regime, liquidity conditions, and volatility
-	•	Produces regime-aware equity outlooks and stock selections
-	•	Outputs strict, structured JSON suitable for dashboards or downstream systems
+No narratives. No opinions. Only market-implied probabilities.
 
 ⸻
 
-📊 Data Sources
-	•	Polymarket Gamma API – event & market metadata
-	•	Polymarket CLOB API – real-time midpoint prices for outcome tokens
+What It Does
 
-Tracked macro themes include:
-	•	Federal Reserve rate decisions
-	•	Treasury yield ceilings & floors
-	•	Inflation expectations
-	•	U.S. recession probability
-	•	AI progress benchmarks
-	•	Crypto-related corporate behavior
+Users select:
+	•	Macro signals (recession risk, rate cuts, inflation, liquidity)
+	•	Companies (e.g. NVDA, MSFT, GOOGL)
 
-⸻
+Market Pulse then:
+	•	Aggregates prediction market probabilities
+	•	Infers the current macro regime
+	•	Produces regime-consistent asset outlooks
 
-🧠 Intelligence Layer
-
-The system uses a large language model (LLaMA-3 via Groq) with carefully engineered prompts to:
-	•	Infer macro regime (Risk-On / Risk-Off / Transitional)
-	•	Assess liquidity and volatility conditions
-	•	Derive crowd-implied recession and policy bias
-	•	Generate sector-diverse, ETF-free stock recommendations
-	•	Enforce strict output validation (JSON-only, no hallucinated assets)
+Outputs are deterministic and probability-driven.
 
 ⸻
 
-🏗️ System Architecture
-
-Polymarket APIs
-   │
-   ├─ Event & Market Fetching (Gamma API)
-   ├─ Price Normalization (CLOB midpoint + fallbacks)
-   │
-   ▼
-Structured Macro Probability Dataset
-   │
-   ▼
-LLM Macro Reasoning Engine
-   │
-   ▼
-Market Regime + Asset Outlook + Stock Picks (JSON)
-
+Key Features
+	•	Macro Regime: Risk-On / Risk-Off / Transitional
+	•	Crowd Signals: Recession probability, policy bias
+	•	Asset Outlook: Direction, confidence, reasoning
+	•	Risk Indicators: Bubble risk, fragility, asymmetry
 
 ⸻
 
-⚙️ Tech Stack
-	•	Python
-	•	Polymarket Gamma & CLOB APIs
-	•	LangChain
-	•	LLaMA-3 (via Groq)
-	•	REST APIs
-	•	Environment-based secret management
+Tech Stack
+
+Backend
+	•	Python, FastAPI
+	•	Polymarket API
+	•	Deterministic signal engine
+	•	LLM via Sarvam AI
+
+Frontend
+	•	Next.js (App Router)
+	•	TypeScript, Tailwind CSS
 
 ⸻
 
-🚀 How to Run
+Run Locally
 
-1️⃣ Clone the repository
+Backend
 
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+uvicorn app:app --reload
 
-2️⃣ Set up environment variables
+Frontend
 
-Create a file named key.env:
-
-GROQ_API_KEY=your_api_key_here
-
-⚠️ key.env is ignored by Git and should never be committed.
-
-(Optional example file is provided as key.env.example.)
-
-3️⃣ Install dependencies
-
-pip install requests langchain-groq python-dotenv
-
-4️⃣ Run the pipeline
-
-python Polymarket_Updated.py
+npm install
+npm run dev
 
 
 ⸻
 
-📈 Sample Output
+API Example
 
-The system outputs a single structured JSON object containing:
-	•	Market sentiment score
-	•	Risk & liquidity regime
-	•	Crowd-implied recession probability
-	•	Asset outlook (equities, bitcoin, U.S. economy)
-	•	Top 3 regime-aligned stocks
-	•	Risk & stress indicators
+{
+  "events": ["inflation_2026", "us_recession_2026"],
+  "companies": ["NVDA", "MSFT", "GOOGL"]
+}
 
-Designed for easy integration into dashboards or front-end UIs.
 
 ⸻
 
-🔐 Security & Best Practices
-	•	API keys are managed via environment variables
-	•	Secrets are excluded using .gitignore
-	•	Strict JSON validation prevents malformed outputs
-	•	ETF and index leakage explicitly blocked
+Notes
+	•	MVP for exploration only
+	•	Not financial advice
+	•	Reflects market beliefs, not certainty
 
 ⸻
 
-🎯 Use Cases
-	•	Macro regime monitoring
-	•	Quant-adjacent research
-	•	Market dashboards
-	•	AI-assisted investment analysis
-	•	Prediction-market research
-
-⸻
-
-📌 Disclaimer
-
-This project is for educational and research purposes only.
-It does not constitute financial advice.
+Powered by Polymarket & Sarvam AI
