@@ -40,6 +40,16 @@ COMPANY_SIGNAL_MAP = {
         "macro": ["rates", "recession"]
     },
 
+    "AAPL": {
+        "primary": [],
+        "macro": ["rates", "inflation", "recession"]
+    },
+
+    "AMZN": {
+        "primary": ["consumer_spending"],
+        "macro": ["rates", "inflation", "recession"]
+    },
+
     "XOM": {
         "primary": ["inflation"],
         "macro": ["rates", "recession"]
